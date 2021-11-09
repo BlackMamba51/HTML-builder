@@ -9,6 +9,14 @@ fs.mkdir(pathToNewFile, {recursive:true}, (err) => {
     if (err) throw err;
 });
 
+fs.readdir(pathToNewFile, {recursive:true}, (err, files) => {
+    for(let file of files) {
+        fs.unlink(path.join(pathToNewFile, file), () => {
+            
+        })
+    }
+})
+
 fs.readdir(pathToFile, 'utf-8', (dirError, data) => {
     if (dirError) throw dirError;
 
@@ -17,8 +25,10 @@ fs.readdir(pathToFile, 'utf-8', (dirError, data) => {
         let pathFiles = path.join(pathToFile, file);
 
         fs.copyFile(pathFiles,path.join(pathToNewFile, file),(copyError) => {
-            if (copyError) throw copyError
+            if (copyError) throw copyError;
         })
     }
 });
+
+
 
