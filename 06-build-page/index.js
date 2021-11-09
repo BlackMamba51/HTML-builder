@@ -61,7 +61,13 @@ fs.readdir(folderStyle, 'utf-8', (error, data) => {
 fs.mkdir(newAssetsFile, {recursive:true}, (assetsErr) => {
     if(assetsErr) throw assetsErr;
 });
-
+fs.readdir(newAssetsFile, {recursive:true}, (err, data) => {
+    for(let file of data) {
+        fs.unlink(path.join(newAssetsFile, file), () => {
+            
+        })
+    }
+})
 fs.readdir(oldAssetsFile, 'utf-8', (oldErr, files) => {
     if(oldErr) throw oldErr;
 
